@@ -1,20 +1,46 @@
 import React from 'react'
 import phone from '../images/second-main-phone.png';
-import testimonial1 from '../images/girl-testimonial.png';
-import testimonial2 from '../images/man-testimonial.png';
-import testimonial3 from '../images/man-testimonial2.png';
+
 import quote1 from '../images/quote1.svg';
 import quote2 from '../images/quote2.svg';
+import Slider from "react-slick";
+// import { baseUrl } from '../images';
+// const baseUrl = "../images/";
 
 class Mainpage extends React.Component{
     
     state = {
         isSelected: true
     }
+
+    imageHandler=(e)=>{
+        e.preventDefault();
+        console.log(e.currentTarget)
+        // alert(e.currentTarget.value);
+    }
     
     render(){
+        const settings = {
+            customPaging: function(i){
+                return(
+                    <a>
+                        <img src={require(`../images/testimonial0${i+1}.png`)} 
+                        alt="testimonial1" id="image1" className={"w-4xl"}/>
+                    </a>
+                )
+            },
+            dots: true,
+            dotsClass: "slick-dots",
+            infinite: true,
+            speed: 500,
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            arrows: false
+        };
+  
         return(
             <>
+            
             <div className="flex justify-center mt-12 mx-12 px-12"> 
                 <div className="">
                     <img src={phone} alt="phone" className="max-w-xs"/>
@@ -39,11 +65,24 @@ class Mainpage extends React.Component{
                 className="w-100 h-auto flex flex-col justify-center py-16 px-40" 
                 style={{backgroundColor:"#1e344c"}} >
                 <h3 className="text-center text-5xl font-bold text-white mb-10">Meet some of our incredible customers</h3>
-                <div className="flex justify-center mb-10">
-                    <img src={testimonial1} alt="testimonial1" id="image1" className={`mx-2 w-40 cursor-pointer `} value="1" onClick={this.imageHandler(this.value)}/>
-                    <img src={testimonial2} alt="testimonial2" id="image2" className={`mx-2 w-40 cursor-pointer `} value="2" onClick={this.imageHandler(this.value)}/>
-                    <img src={testimonial3} alt="testimonial3" id="image3" className={`mx-2 w-40 cursor-pointer `} value="3" onClick={this.imageHandler(this.value)}/>
-                </div>
+                {/* <div className="flex justify-center mb-10">
+                    <img src={testimonial1} alt="testimonial1" id="image1" className={"mx-2 w-40 cursor-pointer "} value="1" onClick={this.imageHandler}/>
+                    <img src={testimonial2} alt="testimonial2" id="image2" className={"mx-2 w-40 cursor-pointer "} value="2" onClick={this.imageHandler}/>
+                    <img src={testimonial3} alt="testimonial3" id="image3" className={"mx-2 w-40 cursor-pointer "} value="3" onClick={this.imageHandler}/>
+                </div> */}
+
+                <Slider {...settings}>
+                    <div>
+                        <img src={require(`../images/testimonial01.png`)} alt="testimonial"/>
+                    </div>
+                    <div>
+                        <img src={require("../images/testimonial02.png")} alt="testimonial"/>
+                    </div>
+                    <div>
+                        <img src={require("../images/testimonial03.png")} alt="testimonial"/>
+                    </div>
+                </Slider>
+                
                 <div className="flex justify-center">
                     <img src={quote2} alt="quote1" className="pb-48"/>
                         <p className="text-white pt-2 px-10" style={{maxWidth: "43rem"}}>
@@ -64,7 +103,24 @@ class Mainpage extends React.Component{
                     (888) 567-8912
                 </h2>
                 <p className="text-xl">Monday - Friday  |  7am - 4pm PST</p>
+                
+                <div>
+                    <h2> Single Item!</h2>
+                        
+                </div>
             </div>
+            
+                        {/* <div className="flex">
+                    <Slider {...settings}>
+                            <div>
+                                <img style={{ maxWidth: '100%' }} src={testimonial1} alt="testimonial1" id="image1" className={"cursor-pointer "} value="1" />
+                            </div>
+                            <div>
+                                <img style={{ maxWidth: '100%' }} src={testimonial2} alt="testimonial2" id="image2" className={"cursor-pointer "} value="2" />
+                            </div>               
+                    </Slider>
+                        </div> */}
+            
             
             </>
         )
