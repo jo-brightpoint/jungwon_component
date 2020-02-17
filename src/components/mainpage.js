@@ -10,55 +10,68 @@ import testimonial3 from '../images/testimonial03.png';
 class Mainpage extends React.Component{
     
     state = {
-        isSelected: -1,
+        selectedIndex: 1,
         testimonials: [
             {
                 profileImage: testimonial1,
-                words: "Running a business like ours when we need the capital, we need it immediately.",
+                words: "testimonial A",
                 id: 0
             },
             {
                 profileImage: testimonial2,
-                words: "testimonial 2",
+                words: "testimonial B",
                 id: 1
             },
             {
                 profileImage: testimonial3,
-                words: "testimonial 3",
+                words: "testimonial C",
                 id: 2
             }
         ]
     }
-    
-    imageHandler = (e, testimonial) => {
+
+    displayImages=()=>{
+        return this.state.testimonials.map((testimonial)=>{
+            if(testimonial.id === 1){
+                return (<img key={testimonial.id} src={testimonial.profileImage} alt=""className={"opacity-100"}/>);  
+            }
+            else{
+                return (<img 
+                key={testimonial.id} 
+                src={testimonial.profileImage} 
+                alt=""
+                className={"opacity-25 cursor-pointer"} 
+                onClick={(e) => this.imageClickHandler(e, testimonial)}
+                />
+                )}
+        })
+    }
+
+    imageClickHandler = (e, position) => {
         e.preventDefault();
         e.persist();
+        
+        // when first image clicked
+        if(position.id === 0){
+            // swap [0] and [1] in testimonials array
+            [this.state.testimonials[0], this.state.testimonials[1]] = [this.state.testimonials[1], this.state.testimonials[0]];
 
-        // first image
-        if(testimonial.id === 0){
-            e.currentTarget.nextElementSibling.style.opacity = "1";
-            e.currentTarget.style.opacity = "0.25";
-            const currentTargetImage = e.currentTarget.src;
-            const nextTargetImage = e.currentTarget.nextElementSibling.src;
-
-            e.currentTarget.src = nextTargetImage;
-            e.currentTarget.nextElementSibling.src = currentTargetImage;
-
+            // update the target image and the next image
+            e.currentTarget.src = this.state.testimonials[0].profileImage;
+            e.currentTarget.nextElementSibling.src = this.state.testimonials[1].profileImage;
         }
+        
+        // when thrid image clicked
+        if(position.id === 2){
+            // swap [1] and [2] in testimonials array
+            [this.state.testimonials[1], this.state.testimonials[2]] = [this.state.testimonials[2], this.state.testimonials[1]];
 
-        // last image
-        if(testimonial.id === 2){
-            e.currentTarget.previousElementSibling.style.opacity = "1";
-            e.currentTarget.style.opacity = "0.25";
-            const currentTargetImage = e.currentTarget.src;
-            const previousTargetImage = e.currentTarget.previousElementSibling.src;
-
-            console.log(e.currentTarget.src);
-            console.log(currentTargetImage);
-            e.currentTarget.src = previousTargetImage;
-            e.currentTarget.previousElementSibling.src = currentTargetImage;
+            // update the target image and the next image
+            e.currentTarget.src = this.state.testimonials[2].profileImage;
+            e.currentTarget.previousElementSibling.src = this.state.testimonials[1].profileImage;
         }
-
+        
+        document.getElementById('testimonial-text').innerHTML = this.state.testimonials[1].words;        
     }
     
     render(){
@@ -88,97 +101,14 @@ class Mainpage extends React.Component{
                 className="w-100 h-auto flex flex-col justify-center py-16 px-40" 
                 style={{backgroundColor:"#1e344c"}} >
                 <h3 className="text-center text-5xl font-bold text-white mb-10">Meet some of our incredible customers</h3>
-                <div className="flex justify-center mb-10">
-                    {/* <img src={testimonial1} alt="testimonial1" id="image1" className={"mx-2 w-40 cursor-pointer opacity-50"} value="1" onClick={this.imageHandler}/>
-                    <img src={testimonial2} alt="testimonial2" id="image2" className={"mx-2 w-40 cursor-pointer opacity-50"} value="2" onClick={this.imageHandler}/>
-                    <img src={testimonial3} alt="testimonial3" id="image3" className={"mx-2 w-40 cursor-pointer opacity-50"} value="3" onClick={this.imageHandler}/> */}
+                <div className="flex justify-center" id="display-images">
+                    {this.displayImages()}
                 </div>
 
-                <div className="flex justify-center" id="arrayImages">
-                    {
-                        this.state.testimonials.map((testimonial)=>{
-                            if(testimonial.id === 1){
-                                return <img 
-                                        key={testimonial.profileImage} 
-                                        src={testimonial.profileImage} 
-                                        alt=""
-                                        className={"opacity-100"} 
-                                        />  
-                            }
-                            else{
-                                return <img 
-                                key={testimonial.profileImage} 
-                                src={testimonial.profileImage} 
-                                alt=""
-                                className={"opacity-25 cursor-pointer"} 
-                                onClick={(e) => this.imageHandler(e, testimonial)}
-                                />
-                            }
-                        })
-                    }
-                </div>
-
-                {/* <p>{this.state.testimonials.filter(t=>t.id === this.state.index)[0].msg}</p> */}
-    {/* <p>{this.state.testimonials.filter(t => t.id === this.state.index)[0].msg}</p> */}
-
-                {/* <div className="flex flex-col justify-center" ref={this.testimonial1}>
-                    <img src={testimonial1} alt="testimonial1" id="image1" className={"mx-2 w-40 cursor-pointer opacity-50"} value="1" onClick={this.imageHandler}/>
-                    <div className="flex justify-center">
-                        <img src={quote2} alt="quote1" className="pb-48"/>
-                        <p style={{maxWidth: "43rem", color:"white", padding: "0.5rem 2.5rem 0"}}>
-                            Running a business like ours when we need the capital, we need it immediately. 
-                            Timing is of the essence for us and BrightPoint always delivered what we needed. 
-                            Our revenue jumped more than 300% and grew from 4 employees to over 20 in just two years.
-                            <br />
-                            <br />
-                            Evelyn J  |  Contractors  |  $150,000
-                        </p>
-                        <img src={quote1} alt="quote2" className="pt-xl"/>
-                    </div>
-                </div>
-
-
-                <div className="flex flex-col justify-center" ref={this.testimonial2}>
-                    <img src={testimonial2} alt="testimonial1" id="image2" className={"mx-2 w-40 cursor-pointer opacity-50"} value="12" onClick={this.imageHandler}/>
-                    <div className="flex justify-center">
-                        <img src={quote2} alt="quote2" className="pb-48"/>
-                        <p style={{maxWidth: "43rem", color:"white", padding: "0.5rem 2.5rem 0"}}>
-                            Running a business like ours when we need the capital, we need it immediately. 
-                            Timing is of the essence for us and BrightPoint always delivered what we needed. 
-                            Our revenue jumped more than 300% and grew from 4 employees to over 20 in just two years.
-                            <br />
-                            <br />
-                            Evelyn J  |  Contractors  |  $150,000
-                        </p>
-                        <img src={quote1} alt="quote1" className="pt-xl"/>
-                    </div>
-                </div>
-
-                <div className="flex flex-col justify-center" ref={this.testimonial3}>
-                    <img src={testimonial3} alt="testimonial1" id="image3" className={"mx-2 w-40 cursor-pointer opacity-50"} value="12" onClick={this.imageHandler}/>
-                    <div className="flex justify-center">
-                        <img src={quote2} alt="quote2" className="pb-48"/>
-                        <p style={{maxWidth: "43rem", color:"white", padding: "0.5rem 2.5rem 0"}}>
-                            Running a business like ours when we need the capital, we need it immediately. 
-                            Timing is of the essence for us and BrightPoint always delivered what we needed. 
-                            Our revenue jumped more than 300% and grew from 4 employees to over 20 in just two years.
-                            <br />
-                            <br />
-                            Evelyn J  |  Contractors  |  $150,000
-                        </p>
-                        <img src={quote1} alt="quote1" className="pt-xl"/>
-                    </div>
-                </div> */}
-
-                {/* <div>
-                    <img src={require(`../images/testimonial01.png`)} alt="testimonial"/>
-                </div>
                 <div>
-                    <img src={require("../images/testimonial02.png")} alt="testimonial"/>
+                    {/* <p>{this.state.testimonials.filter(t=>t.id === this.state.selectedIndex)[0].words}</p>     */}
+                    <p id='testimonial-text'>{this.state.testimonials[1].words}</p>
                 </div>
-                <div>
-                    <img src={require("../images/testimonial03.png")} alt="testimonial"/>
-                </div> */}
             </div>
 
             <div className="flex flex-col justify-center items-center my-24">
