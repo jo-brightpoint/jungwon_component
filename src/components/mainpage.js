@@ -118,13 +118,13 @@ class Mainpage extends React.Component{
             </div>
 
             <div 
-                className="w-100 h-auto flex flex-col justify-center text-center py-20 px-40 -mt-48" 
+                className="w-100 h-auto flex flex-col justify-center text-center py-20 px-40 -mt-64" 
                 style={{backgroundColor:"#1e344c"}} >
                 <h3 className="text-center text-5xl font-bold text-white mb-10">Meet some of our incredible customers</h3>
                 <div className="flex justify-center">
                     {this.displayImages()}
                 </div>
-                <div className="flex justify-center my-4 max-w-3xl ml-auto mr-auto">
+                <div className="flex justify-center my-4 max-w-3xl ml-auto mr-auto mt-10">
                     {/* <p>{this.state.testimonials.filter(t=>t.id === this.state.selectedIndex)[0].words}</p> */}
                     <div className="mb-auto w-1/2 mr-4 -mt-2" style={{maxWidth: "2rem"}}><img src={quote1_1} alt=""/></div>
                     <div className="w-1/2">
