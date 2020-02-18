@@ -3,3 +3,24 @@
 @tailwind components;
 
 @tailwind utilities;
+
+@font-face {
+    font-family: "Messina";
+    font-weight: normal;
+    src: url("../fonts/MessinaSansWeb-Regular.eot") format("eot"), url("../fonts/MessinaSansWeb-Regular.woff") format("woff"),
+      url("../fonts/MessinaSansWeb-Regular.woff2") format("woff2");
+}
+  
+@font-face {
+font-family: "Messina Light";
+font-weight: normal;
+src: url("../fonts/MessinaSansWeb-Light.eot") format("eot"), url("../fonts/MessinaSansWeb-Light.woff") format("woff"),
+    url("../fonts/MessinaSansWeb-Light.woff2") format("woff2");
+}
+
+@font-face {
+font-family: "Messina Bold";
+font-weight: normal;
+src: url("../fonts/MessinaSansWeb-Bold.eot") format("eot"), url("../fonts/MessinaSansWeb-Bold.woff") format("woff"),
+    url("../fonts/MessinaSansWeb-Bold.woff2") format("woff2");
+}
