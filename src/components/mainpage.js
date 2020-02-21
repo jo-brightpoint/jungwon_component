@@ -9,11 +9,15 @@ import testimonial1 from '../images/testimonial01.jpg';
 import testimonial2 from '../images/testimonial02.jpg';
 import testimonial3 from '../images/testimonial03.jpg';
 import {BrowserView, MobileView} from 'react-device-detect';
+import Carousel, {Dots} from '@brainhubeu/react-carousel';
+import '@brainhubeu/react-carousel/lib/style.css';
+
 import Slider from 'react-slick';
 
 class Mainpage extends React.Component{
     
     state = {
+        value: 0,
         selectedIndex: 1,
         testimonials: [
             {
@@ -29,26 +33,23 @@ class Mainpage extends React.Component{
             {
                 profileImage: testimonial2,
                 words: 
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, " + 
-                "sed do eiusmod tempor incididunt ut labore et dolore magna aliqua." + 
-                "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut" +
-                "aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit" + 
-                "in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint" + 
-                "occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+                "I tried our bank and went through all the headache process just to be told we need to provide more documents. I was running out of the time and tried BrightPoint. We secured $300,000 in less than a week. Since then, BrightPoint became our true business partner.",
                 info: 
-                "John Doe  |  Contractors  |  $250,000",
+                "John D  |  Contractors  |  $250,000",
                 id: 1
             },
             {
                 profileImage: testimonial3,
                 words: 
-                "Donec sodales sagittis magna. Sed consequat, leo eget bibendum sodales, " + 
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, " + 
-                "augue velit cursus nunc.",
+                " Amazingly fast and simple! With just one page application and bank statements, we received $50,000 in just two days. We’ve been working with BrightPoint for over 2 years now and will continue to be our primary source of working capital whenever we need them.",
                 info: "Gabe J  |  Contractors  |  $150,000",
                 id: 2
             }
         ]
+    }
+
+    onChange=(value)=>{
+        this.setState({value});
     }
 
     displayImages=()=>{
@@ -151,7 +152,56 @@ class Mainpage extends React.Component{
                     </div>
                 </BrowserView>
                 <MobileView>
-                    <Slider {...settings}>
+                    <Carousel
+                        value = {this.state.value}
+                        onChange = {this.onChange}
+                        infinite
+                        slides={[
+                            (
+                                <div className="flex flex-col justify-center text-center">
+                                    <img 
+                                    key={this.state.testimonials[0].id} 
+                                    src={this.state.testimonials[0].profileImage} 
+                                    alt="testimonial profile"
+                                    className={"opacity-100 h-auto rounded-full w-2/6 border-white border-2 mx-auto mb-4"}/>
+                                    <p className="text-left text-gray-500 px-8">{this.state.testimonials[0].words}</p>
+                                    <br />
+                                    <p className="text-left text-gray-500 px-8">{this.state.testimonials[0].info}</p>
+                                </div>
+                            ),
+                            (
+                                <div className="flex flex-col justify-center text-center">
+                                    <img 
+                                        key={this.state.testimonials[1].id} 
+                                        src={this.state.testimonials[1].profileImage} 
+                                        alt="testimonial profile"
+                                        className={"opacity-100 h-auto rounded-full w-2/6 border-white border-2 mx-auto mb-4"}/>
+                                    <p className="text-left text-gray-500 px-8">{this.state.testimonials[1].words}</p>
+                                    <br />
+                                    <p className="text-left text-gray-500 px-8">{this.state.testimonials[1].info}</p>
+                                </div>
+                            ),
+                            (
+                                <div className="flex flex-col justify-center text-center">
+                                    <img 
+                                        key={this.state.testimonials[2].id} 
+                                        src={this.state.testimonials[2].profileImage} 
+                                        alt="testimonial profile"
+                                        className={"opacity-100 h-auto rounded-full w-2/6 border-white border-2 mx-auto mb-4"}/>
+                                    <p className="text-left text-gray-500 px-8">{this.state.testimonials[2].words}</p>
+                                    <br />
+                                    <p className="text-left text-gray-500 px-8">{this.state.testimonials[2].info}</p>
+                                </div>
+                            ),
+                        ]}
+                    />
+                    <div className="mb-4"/>
+                    <Dots value={this.state.value} onChange={this.onChange} number={3}/>
+                </MobileView>
+                    
+                        
+                
+                    {/* <Slider {...settings}>
                         <div className="flex flex-col justify-center text-center">
                             <img 
                             key={this.state.testimonials[0].id} 
@@ -184,8 +234,8 @@ class Mainpage extends React.Component{
                             <br />
                             <p className="text-left text-gray-500 px-8">{this.state.testimonials[2].info}</p>
                         </div>
-                    </Slider>
-                </MobileView>
+                    </Slider> */}
+                
 
             </div>
 

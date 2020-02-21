@@ -12,8 +12,8 @@ code {
     monospace;
 }
 
-.slick-dots li.slick-active button:before{
-  color: white !important;
+.BrainhubCarousel__dots .BrainhubCarousel__dot.BrainhubCarousel__dot--selected::before{
+  transform: scale(2.0);
+  background-color: white !important;
   opacity: 1;
-  transform: scale(1.5);
 }
